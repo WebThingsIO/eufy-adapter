@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "Eufy smart plug/bulb adapter plugin for Mozilla IoT Gateway",
   "author": "Mozilla IoT",
-  "main": "main.py",
+  "main": "bootstrap.py",
   "keywords": [
     "mozilla",
     "iot",
@@ -24,13 +24,12 @@
   "files": [
     "LICENSE",
     "SHA256SUMS",
-    "lib",
+    "bootstrap.py",
     "main.py",
     "pkg/__init__.py",
     "pkg/eufy_adapter.py",
     "pkg/eufy_device.py",
-    "pkg/eufy_property.py",
-    "pkg/util.py"
+    "pkg/eufy_property.py"
   ],
   "moziot": {
     "api": {
@@ -38,7 +37,7 @@
       "max": 2
     },
     "plugin": true,
-    "exec": "python3 {path}/main.py",
+    "exec": "python3 {path}/bootstrap.py",
     "config": {
       "username": "",
       "password": ""

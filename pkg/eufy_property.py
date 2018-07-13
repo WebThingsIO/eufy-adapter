@@ -2,8 +2,6 @@
 
 from gateway_addon import Property
 
-from .util import hsv_to_rgb, rgb_to_hsv
-
 
 class EufyProperty(Property):
     """Eufy property type."""
@@ -36,9 +34,6 @@ class EufyProperty(Property):
 
             self.device.eufy_dev.set_state(**kwargs)
 
-        self.set_cached_value(value)
-        self.device.notify_property_changed(self)
-
 
 class EufySwitchProperty(EufyProperty):
     """Property type for Eufy smart switches/plugs."""
@@ -53,6 +48,8 @@ class EufySwitchProperty(EufyProperty):
             return
 
         self.set_state(power=value)
+        self.set_cached_value(value)
+        self.device.notify_property_changed(self)
 
     def update(self):
         """Update the current value, if necessary."""
@@ -86,6 +83,11 @@ class EufyBulbProperty(EufyProperty):
             value = max(value, self.description['minimum'])
             value = min(value, self.description['maximum'])
             self.set_state(temperature=int(value))
+        else:
+            return
+
+        self.set_cached_value(value)
+        self.device.notify_property_changed(self)
 
     def update(self):
         """Update the current value, if necessary."""

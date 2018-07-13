@@ -178,6 +178,10 @@ class EufyBulb(EufyDevice):
 
     def color(self):
         """Determine the current color of the light."""
+        if not hasattr(self.eufy_dev, 'colors') or \
+                self.eufy_dev.colors is None:
+            return '#000000'
+
         return '#{:02X}{:02X}{:02X}'.format(*self.eufy_dev.colors)
 
     def brightness(self):

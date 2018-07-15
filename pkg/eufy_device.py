@@ -5,6 +5,7 @@ import threading
 import time
 
 from .eufy_property import EufyBulbProperty, EufySwitchProperty
+from .util import MIN_TEMPERATURE, MAX_TEMPERATURE, relative_temp_to_kelvin
 
 
 _POLL_INTERVAL = 5
@@ -128,8 +129,8 @@ class EufyBulb(EufyDevice):
                     'label': 'Color Temperature',
                     'type': 'number',
                     'unit': 'kelvin',
-                    'minimum': 2700,
-                    'maximum': 6500,
+                    'minimum': MIN_TEMPERATURE,
+                    'maximum': MAX_TEMPERATURE,
                 },
                 self.color_temp())
 
@@ -174,7 +175,7 @@ class EufyBulb(EufyDevice):
 
     def color_temp(self):
         """Determine the current color temperature."""
-        return self.eufy_dev.temperature
+        return relative_temp_to_kelvin(self.eufy_dev.temperature)
 
     def color(self):
         """Determine the current color of the light."""

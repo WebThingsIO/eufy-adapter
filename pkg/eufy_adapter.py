@@ -56,7 +56,7 @@ class EufyAdapter(Adapter):
             if not self.pairing:
                 break
 
-            _id = 'eufy-' + dev['address']  # TODO: this is unreliable
+            _id = 'eufy-' + dev['id']
             if _id not in self.devices:
                 address = dev['address']
                 code = dev['code']

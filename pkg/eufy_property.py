@@ -2,6 +2,8 @@
 
 from gateway_addon import Property
 
+from .util import kelvin_to_relative_temp
+
 
 class EufyProperty(Property):
     """Eufy property type."""
@@ -82,7 +84,7 @@ class EufyBulbProperty(EufyProperty):
         elif self.name == 'colorTemperature':
             value = max(value, self.description['minimum'])
             value = min(value, self.description['maximum'])
-            self.set_state(temperature=int(value))
+            self.set_state(temperature=kelvin_to_relative_temp(value))
         else:
             return
 

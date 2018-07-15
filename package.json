@@ -29,7 +29,10 @@
     "pkg/__init__.py",
     "pkg/eufy_adapter.py",
     "pkg/eufy_device.py",
-    "pkg/eufy_property.py"
+    "pkg/eufy_property.py",
+    "pkg/util.py",
+    "requirements.txt",
+    "setup.cfg"
   ],
   "moziot": {
     "api": {

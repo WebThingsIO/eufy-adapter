@@ -127,7 +127,7 @@ class EufyBulb(EufyDevice):
                 {
                     '@type': 'ColorTemperatureProperty',
                     'label': 'Color Temperature',
-                    'type': 'number',
+                    'type': 'integer',
                     'unit': 'kelvin',
                     'minimum': MIN_TEMPERATURE,
                     'maximum': MAX_TEMPERATURE,
@@ -141,7 +141,7 @@ class EufyBulb(EufyDevice):
                 {
                     '@type': 'BrightnessProperty',
                     'label': 'Brightness',
-                    'type': 'number',
+                    'type': 'integer',
                     'unit': 'percent',
                     'minimum': 0,
                     'maximum': 100,

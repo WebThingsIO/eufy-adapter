@@ -1,1 +1,1 @@
-git+https://github.com/mrstegeman/python-lakeside#egg=lakeside
+lakeside==0.11

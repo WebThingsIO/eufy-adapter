@@ -77,7 +77,7 @@ class EufySwitch(EufyDevice):
         eufy_dev -- the lakeside device object to initialize from
         """
         EufyDevice.__init__(self, adapter, _id, name, eufy_dev)
-        self._type.append('OnOffSwitch')
+        self._type.extend(['OnOffSwitch', 'SmartPlug'])
         self.type = 'onOffSwitch'
 
         self.properties['on'] = EufySwitchProperty(

@@ -1,6 +1,6 @@
 # eufy-adapter
 
-Eufy smart plug/bulb adapter for Mozilla IoT Gateway.
+Eufy smart plug/bulb adapter for Mozilla WebThings Gateway.
 
 # Supported Devices
 

@@ -1,4 +1,4 @@
-"""Eufy adapter for Mozilla IoT Gateway."""
+"""Eufy adapter for Mozilla WebThings Gateway."""
 
 from gateway_addon import Adapter, Database
 import lakeside

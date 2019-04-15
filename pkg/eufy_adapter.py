@@ -48,7 +48,7 @@ class EufyAdapter(Adapter):
 
         timeout -- Timeout in seconds at which to quit pairing
         """
-        if self.username is None or self.password is None:
+        if self.username is None or self.password is None or self.pairing:
             return
 
         self.pairing = True
@@ -73,6 +73,8 @@ class EufyAdapter(Adapter):
                     continue
 
                 self.handle_device_added(device)
+
+        self.pairing = False
 
     def cancel_pairing(self):
         """Cancel the pairing process."""

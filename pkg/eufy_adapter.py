@@ -63,7 +63,7 @@ class EufyAdapter(Adapter):
                 model = dev['type']
                 name = dev['name']
 
-                if model in ['T1201', 'T1202', 'T1211']:
+                if model in ['T1201', 'T1202', 'T1203', 'T1211']:
                     eufy_dev = lakeside.switch(address, code, model)
                     device = EufySwitch(self, _id, name, eufy_dev)
                 elif model in ['T1011', 'T1012', 'T1013']:

@@ -32,11 +32,8 @@ class EufyDevice(Device):
         if not self.name:
             self.name = self.description
 
-        try:
-            self.eufy_dev.connect()
-            self.eufy_dev.update()
-        except OSError:
-            pass
+        self.eufy_dev.connect()
+        self.eufy_dev.update()
 
         t = threading.Thread(target=self.poll)
         t.daemon = True

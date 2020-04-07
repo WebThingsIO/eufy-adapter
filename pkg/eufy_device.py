@@ -75,17 +75,17 @@ class EufySwitch(EufyDevice):
         """
         EufyDevice.__init__(self, adapter, _id, name, eufy_dev)
         self._type.extend(['OnOffSwitch', 'SmartPlug'])
-        self.type = 'onOffSwitch'
 
         self.properties['on'] = EufySwitchProperty(
             self,
             'on',
             {
                 '@type': 'OnOffProperty',
-                'label': 'On/Off',
+                'title': 'On/Off',
                 'type': 'boolean',
             },
-            self.is_on())
+            self.is_on()
+        )
 
 
 class EufyBulb(EufyDevice):
@@ -111,11 +111,13 @@ class EufyBulb(EufyDevice):
                 'color',
                 {
                     '@type': 'ColorProperty',
-                    'label': 'Color',
+                    'title': 'Color',
                     'type': 'string',
                 },
-                self.color())
-        elif self.is_variable_color_temp():
+                self.color()
+            )
+
+        if self.is_variable_color_temp():
             self._type.append('ColorControl')
 
             self.properties['colorTemperature'] = EufyBulbProperty(
@@ -123,44 +125,56 @@ class EufyBulb(EufyDevice):
                 'colorTemperature',
                 {
                     '@type': 'ColorTemperatureProperty',
-                    'label': 'Color Temperature',
+                    'title': 'Color Temperature',
                     'type': 'integer',
                     'unit': 'kelvin',
                     'minimum': MIN_TEMPERATURE,
                     'maximum': MAX_TEMPERATURE,
                 },
-                self.color_temp())
+                self.color_temp()
+            )
 
-        if not self.is_color():
-            self.properties['level'] = EufyBulbProperty(
+        if self.is_color() and self.is_variable_color_temp():
+            self.properties['colorMode'] = EufyBulbProperty(
                 self,
-                'level',
+                'colorMode',
                 {
-                    '@type': 'BrightnessProperty',
-                    'label': 'Brightness',
-                    'type': 'integer',
-                    'unit': 'percent',
-                    'minimum': 0,
-                    'maximum': 100,
+                    '@type': 'ColorModeProperty',
+                    'title': 'Color Mode',
+                    'type': 'string',
+                    'enum': [
+                        'color',
+                        'temperature',
+                    ],
+                    'readOnly': True,
                 },
-                self.brightness())
+                self.color_mode()
+            )
+
+        self.properties['level'] = EufyBulbProperty(
+            self,
+            'level',
+            {
+                '@type': 'BrightnessProperty',
+                'title': 'Brightness',
+                'type': 'integer',
+                'unit': 'percent',
+                'minimum': 0,
+                'maximum': 100,
+            },
+            self.brightness()
+        )
 
         self.properties['on'] = EufyBulbProperty(
             self,
             'on',
             {
                 '@type': 'OnOffProperty',
-                'label': 'On/Off',
+                'title': 'On/Off',
                 'type': 'boolean',
             },
-            self.is_on())
-
-        if self.is_color():
-            self.type = 'onOffColorLight'
-        elif self.is_variable_color_temp():
-            self.type = 'dimmableColorLight'
-        else:
-            self.type = 'dimmableLight'
+            self.is_on()
+        )
 
     def is_color(self):
         """Determine whether or not the light is color-changing."""
@@ -181,6 +195,13 @@ class EufyBulb(EufyDevice):
             return '#000000'
 
         return '#{:02X}{:02X}{:02X}'.format(*self.eufy_dev.colors)
+
+    def color_mode(self):
+        """Determine the current color mode."""
+        if self.color() == '#000000':
+            return 'temperature'
+
+        return 'color'
 
     def brightness(self):
         """Determine the current brightness of the light."""

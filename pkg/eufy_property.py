@@ -73,18 +73,32 @@ class EufyBulbProperty(EufyProperty):
 
         value -- the value to set
         """
+        color_mode_prop = None
+        if 'colorMode' in self.device.properties:
+            color_mode_prop = self.device.properties['colorMode']
+
         if self.name == 'on':
             self.set_state(power=value)
         elif self.name == 'color':
             self.set_state(colors=[int(value[1:3], 16),
                                    int(value[3:5], 16),
                                    int(value[5:7], 16)])
+
+            # update the colorMode property
+            if color_mode_prop is not None:
+                color_mode_prop.set_cached_value('color')
+                self.device.notify_property_changed(color_mode_prop)
         elif self.name == 'level':
             self.set_state(brightness=value)
         elif self.name == 'colorTemperature':
             value = max(value, self.description['minimum'])
             value = min(value, self.description['maximum'])
             self.set_state(temperature=kelvin_to_relative_temp(value))
+
+            # update the colorMode property
+            if color_mode_prop is not None:
+                color_mode_prop.set_cached_value('temperature')
+                self.device.notify_property_changed(color_mode_prop)
         else:
             return
 
@@ -101,6 +115,8 @@ class EufyBulbProperty(EufyProperty):
             value = self.device.brightness()
         elif self.name == 'colorTemperature':
             value = self.device.color_temp()
+        elif self.name == 'colorMode':
+            value = self.device.color_mode()
         else:
             return
 

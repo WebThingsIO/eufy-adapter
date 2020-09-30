@@ -46,6 +46,8 @@ function install_linux_cross_compiler() {
 }
 
 function build_native() {
+  python -m pip install -U pip
+  python -m pip install -U setuptools wheel
   ADDON_ARCH=${ADDON_ARCH} ./package.sh
 }
 

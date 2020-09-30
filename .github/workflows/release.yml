@@ -76,10 +76,10 @@ jobs:
     - name: Set env
       run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:11})
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.version }}
-      uses: actions/setup-node@v1
+    - name: Use Python ${{ matrix.version }}
+      uses: actions/setup-python@v1
       with:
-        node-version: ${{ matrix.version }}
+        python-version: ${{ matrix.version }}
     - name: Build adapter
       run: |
         ./build.sh "${{ matrix.platform }}" "${{ matrix.language }}" "${{ matrix.version }}"

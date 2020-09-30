@@ -1,4 +1,4 @@
-"""Eufy adapter for Mozilla WebThings Gateway."""
+"""Eufy adapter for WebThings Gateway."""
 
 from os import path
 import functools

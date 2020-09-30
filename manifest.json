@@ -1,6 +1,6 @@
 {
-  "author": "Mozilla IoT",
-  "description": "Eufy smart plug/bulb adapter plugin for Mozilla WebThings Gateway",
+  "author": "WebThingsIO",
+  "description": "Eufy smart plug/bulb adapter plugin for WebThings Gateway",
   "gateway_specific_settings": {
     "webthings": {
       "exec": "python3 {path}/main.py",
@@ -9,7 +9,7 @@
       "strict_min_version": "0.10.0"
     }
   },
-  "homepage_url": "https://github.com/mozilla-iot/eufy-adapter",
+  "homepage_url": "https://github.com/WebThingsIO/eufy-adapter",
   "id": "eufy-adapter",
   "license": "MPL-2.0",
   "manifest_version": 1,
@@ -38,5 +38,5 @@
     }
   },
   "short_name": "Eufy",
-  "version": "0.3.2"
+  "version": "0.3.3"
 }

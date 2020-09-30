@@ -1,4 +1,4 @@
-"""Eufy adapter for Mozilla WebThings Gateway."""
+"""Eufy adapter for WebThings Gateway."""
 
 from gateway_addon import Device
 import threading
